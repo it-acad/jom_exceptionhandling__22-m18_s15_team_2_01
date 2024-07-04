@@ -35,7 +35,7 @@ public class ToDoServiceImpl implements ToDoService {
         if (optional.isPresent()) {
             return optional.get();
         }
-        throw new EntityNotFoundException("To-Do with id " + id + " not found");
+        throw new EntityNotFoundException("ToDo with id " + id + " not found");
     }
 
     @Override
@@ -46,7 +46,7 @@ public class ToDoServiceImpl implements ToDoService {
                 return todoRepository.save(todo);
             }
         }
-        throw new NullEntityReferenceException("To-Do cannot be 'null'");
+        throw new NullEntityReferenceException("ToDo can't be 'null'");
     }
 
     @Override
@@ -55,7 +55,7 @@ public class ToDoServiceImpl implements ToDoService {
         if (todo != null) {
             todoRepository.delete(todo);
         } else {
-            throw new EntityNotFoundException("To-Do with id " + id + " not found");
+            throw new EntityNotFoundException("ToDo with id " + id + " not found");
         }
     }
 
