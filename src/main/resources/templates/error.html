@@ -12,18 +12,18 @@
         }
 
         div#errorCode {
-            font-size: 75px;
-            color: dimgrey;
+            font-size: 70px;
+            color: #434343;
         }
 
         div#errorCodeDescription {
             font-size: 28px;
-            color: slategrey;
+            color: #7e91aa;
         }
 
         div#errorMessage {
             font-size: 18px;
-            color: lightslategrey;
+            color: #879bb5;
             user-select: text;
         }
     </style>
@@ -34,6 +34,8 @@
 <div class="message" id="errorCode" th:text="${code}"></div>
 <div class="message" id="errorCodeDescription" th:text="${codeDescription}"></div>
 <br>
-<div class="message" id="errorMessage"><pre th:text="${message}"></pre></div>
+<div class="message" id="errorMessage">
+    <pre th:text="${message}"></pre>
+</div>
 </body>
 </html>
