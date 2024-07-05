@@ -1,10 +1,12 @@
 package com.softserve.itacademy.service.impl;
 
+import com.softserve.itacademy.exception.NullEntityReferenceException;
 import com.softserve.itacademy.model.Task;
 import com.softserve.itacademy.repository.TaskRepository;
 import com.softserve.itacademy.service.TaskService;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.EntityNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -19,25 +21,40 @@ public class TaskServiceImpl implements TaskService {
 
     @Override
     public Task create(Task user) {
+        try{
             return taskRepository.save(user);
+        }
+        catch (RuntimeException e){
+            throw new NullEntityReferenceException("Task can't be 'null'");
+        }
     }
 
     @Override
     public Task readById(long id) {
         Optional<Task> optional = taskRepository.findById(id);
+        if (optional.isPresent()) {
             return optional.get();
+        }
+        throw new EntityNotFoundException("Task with id " + id + " not found");
     }
 
     @Override
     public Task update(Task task) {
-            Task oldTask = readById(task.getId());
+        if(task != null){
+            if(readById(task.getId()) != null){
                 return taskRepository.save(task);
+            }
+        }
+        throw new NullEntityReferenceException("Task can't be 'null'");
     }
 
     @Override
     public void delete(long id) {
         Task task = readById(id);
-            taskRepository.delete(task);
+        if(task == null){
+            throw new EntityNotFoundException("ToDo with id " + id + " not found");
+        }
+        taskRepository.delete(task);
     }
 
     @Override
