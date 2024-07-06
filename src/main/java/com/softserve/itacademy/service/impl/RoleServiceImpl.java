@@ -34,7 +34,7 @@ public class RoleServiceImpl implements RoleService {
         if (optional.isPresent()) {
             return optional.get();
         }
-        throw new EntityNotFoundException("You are searching for not existing role!");
+        throw new EntityNotFoundException("You are searching for not existing role with id=" + id + "!");
     }
 
     @Override
